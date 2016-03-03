@@ -17,12 +17,13 @@ app.controller('GameLogicCtrl', function($scope, GameState) {
 
     if (isGameOver()) {
       $scope.message = `I'm sorry, you're out of turns!`;
+      alert(`Please click 'Reset Game' to play again!`)
     } else {
       $scope.message = `Pick a set of cards that sums to a total of ${$scope.dieValues.one + $scope.dieValues.two}.`;
     }
   };
 
-  $scope.toggleCardRemoval = (event, idx) => {
+  $scope.toggleCardRemoval = (idx) => {
     if ($scope.cardsToRemove[idx + 1]) {
       $scope.cardsToRemove[idx + 1] = false;
     } else {

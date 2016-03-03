@@ -6,7 +6,7 @@
         <hr>
     </div>
     <div class="row">
-        <card ng-class="{'translucent': cardsToRemove[$index + 1]}" value=card ng-repeat="card in cards track by $index" ng-click="toggleCardRemoval($event, $index)"></card>
+        <card ng-class="{'translucent': cardsToRemove[$index + 1]}" value=card ng-repeat="card in cards track by $index" ng-click="toggleCardRemoval($index)"></card>
     </div>
     <div class="row">
         <h3 class="die">Die 1: <die die="dieValues.one"> </die></h3>

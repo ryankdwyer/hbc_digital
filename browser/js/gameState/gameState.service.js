@@ -4,7 +4,6 @@ app.service('GameState', function() {
   this.cards = [1,2,3,4,5,6,7,8,9];
   this.dieValues = {one: 0, two: 0};
   this.validCards = [];
-  this.cardsToRemove = [];
 
   this.buildValidCards = () => {
     var powerSet = this.buildPowerSet();
