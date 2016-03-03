@@ -1,0 +1,26 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/browser/js/dice/dice.directive-compiled.js" />
+        <item url="file://$PROJECT_DIR$/browser/js/gameLogic/game.directive-compiled.js" />
+        <item url="file://$PROJECT_DIR$/browser/js/gameLogic/gameLogic.controller-compiled.js" />
+        <item url="file://$PROJECT_DIR$/browser/js/cards/card.directive-compiled.js" />
+        <item url="file://$PROJECT_DIR$/browser/js/utils/validCard.filter-compiled.js" />
+        <item url="file://$PROJECT_DIR$/browser/js/dice/dice.controller-compiled.js" />
+        <item url="file://$PROJECT_DIR$/browser/js/gameState/gameState.service-compiled.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/browser/js/dice/dice.controller-compiled.js" />
+      <root url="file://$PROJECT_DIR$/browser/js/dice/dice.directive-compiled.js" />
+      <root url="file://$PROJECT_DIR$/browser/js/gameLogic/game.directive-compiled.js" />
+      <root url="file://$PROJECT_DIR$/browser/js/gameLogic/gameLogic.controller-compiled.js" />
+      <root url="file://$PROJECT_DIR$/browser/js/cards/card.directive-compiled.js" />
+      <root url="file://$PROJECT_DIR$/browser/js/utils/validCard.filter-compiled.js" />
+      <root url="file://$PROJECT_DIR$/browser/js/dice/dice.controller-compiled.js" />
+      <root url="file://$PROJECT_DIR$/browser/js/gameState/gameState.service-compiled.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

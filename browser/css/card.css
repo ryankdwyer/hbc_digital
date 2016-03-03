@@ -1,0 +1,15 @@
+.card {
+    height: 5rem;
+    width: 5rem;
+    display: inline-block;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.card:hover {
+    background-color: lightgrey;
+}
+
+.translucent {
+    background-color: lightgrey;
+}
