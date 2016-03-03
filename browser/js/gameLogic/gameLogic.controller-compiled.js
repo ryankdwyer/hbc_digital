@@ -11,12 +11,14 @@ app.controller('GameLogicCtrl', function ($scope, GameState) {
     $scope.gameStarted = GameState.getGameState();
     $scope.cards = GameState.getCardsLeft();
     $scope.cardsToRemove = {};
+
     clearMessage();
     roll();
+
     if (isGameOver()) {
       $scope.message = 'I\'m sorry, you\'re out of turns!';
     } else {
-      $scope.message = 'Pick a set of cards that sums to the total of your die roll.';
+      $scope.message = 'Pick a set of cards that sums to a total of ' + ($scope.dieValues.one + $scope.dieValues.two) + '.';
     }
   };
 

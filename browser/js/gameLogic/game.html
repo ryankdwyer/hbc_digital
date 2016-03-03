@@ -1,14 +1,22 @@
-<div>
-    {{message}}
-</div>
-<div class="card-list">
-    <card class="card" ng-class="{'translucent': cardsToRemove[$index + 1]}" value=card ng-repeat="card in cards track by $index" ng-click="toggleCardRemoval($event, $index)"></card>
-</div>
-<div class="game-board">
-    <die die="dieValues.one"></die>
-    <die die="dieValues.two"></die>
-    <div>Total: {{dieValues.one + dieValues.two}}</div>
-    <button ng-click="removeCards()" ng-show="gameStarted">Remove Cards</button>
-    <button ng-click="startTurn()" ng-hide="gameStarted">Start Game</button>
-    <button ng-click="reset()" ng-show="gameStarted">Reset Game</button>
+<div class="container">
+    <div class="row">
+        <h1>{{message}}</h1>
+    </div>
+    <div>
+        <hr>
+    </div>
+    <div class="row">
+        <card ng-class="{'translucent': cardsToRemove[$index + 1]}" value=card ng-repeat="card in cards track by $index" ng-click="toggleCardRemoval($event, $index)"></card>
+    </div>
+    <div class="row">
+        <h3 class="die">Die 1: <die die="dieValues.one"> </die></h3>
+        <h3 class="die">Die 2: <die die="dieValues.two"> </die></h3>
+    </div>
+    <div class="row">
+        <button class="button" id="remove-cards" ng-click="removeCards()" ng-show="gameStarted">Remove Cards</button>
+        <button class="button" id="start-game" ng-click="startTurn()" ng-hide="gameStarted">Start Game</button>
+    </div>
+    <div class="row">
+        <button class="button" id="reset-game" ng-click="reset()" ng-show="gameStarted">Reset Game</button>
+    </div>
 </div>

@@ -1,15 +1,23 @@
 .card {
     height: 5rem;
     width: 5rem;
-    display: inline-block;
-    border: 1px solid lightgray;
+    margin: 1rem;
     border-radius: 5px;
+    text-align: center;
+    background-color: #3498db;
+    color: white;
+}
+
+.card > div {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .card:hover {
-    background-color: lightgrey;
+    background-color: #2980b9;
 }
 
-.translucent {
-    background-color: lightgrey;
+.translucent div{
+    opacity: .6;
 }
