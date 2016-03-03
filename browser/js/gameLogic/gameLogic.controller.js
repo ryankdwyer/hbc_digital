@@ -6,8 +6,10 @@ app.controller('GameLogicCtrl', function($scope, GameState) {
   $scope.gameStarted = GameState.getGameState();
   $scope.cardsToRemove = {};
 
+  // Runs the game - intitiates all of the logic for each step of the game
   $scope.startTurn = () => {
     GameState.gameStarted = true;
+    GameState.validCards = true;
     $scope.gameStarted = GameState.getGameState();
     $scope.cards = GameState.getCardsLeft();
     $scope.cardsToRemove = {};
@@ -23,6 +25,8 @@ app.controller('GameLogicCtrl', function($scope, GameState) {
     }
   };
 
+  // Adds or removes card from cardsToRemove obj
+  // This also enables dynamic css class changes to change opacity
   $scope.toggleCardRemoval = (idx) => {
     if ($scope.cardsToRemove[idx + 1]) {
       $scope.cardsToRemove[idx + 1] = false;
@@ -33,6 +37,7 @@ app.controller('GameLogicCtrl', function($scope, GameState) {
     }
   };
 
+  // Validates the set of cards and passes to GameState to remove the cards
   $scope.removeCards = () => {
     let total = $scope.dieValues.one + $scope.dieValues.two;
     if (sum($scope.cardsToRemove) === total) {
@@ -43,6 +48,7 @@ app.controller('GameLogicCtrl', function($scope, GameState) {
     }
   };
 
+  // Helper function to reset game variables
   $scope.reset = () => {
     clearMessage();
     GameState.reset();
@@ -53,8 +59,11 @@ app.controller('GameLogicCtrl', function($scope, GameState) {
     $scope.cardsToRemove = {};
   };
 
+  // Generates 2 random numbers between 1 and 6
   let roll = () => {
     $scope.dieValues.one = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
+
+    // If there is only the '1' card left - only roll one die
     if ($scope.cards[0] !== 1 || $scope.cards.length !== 1) {
       $scope.dieValues.two = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
     } else {
@@ -63,6 +72,7 @@ app.controller('GameLogicCtrl', function($scope, GameState) {
     GameState.dieValues = $scope.dieValues;
   };
 
+  // Validates the choice the user makes when they click on a card
   let validChoice = (card) => {
     if ($scope.cards.indexOf(card) === -1)  {
       $scope.message = `You already chose that card. Please pick another card.`;
@@ -76,6 +86,8 @@ app.controller('GameLogicCtrl', function($scope, GameState) {
     return true;
   };
 
+
+  // Used to sum up the object of cardsToRemove
   let sum = (obj) => {
     let count = 0;
     for (var key in obj) {
@@ -84,13 +96,14 @@ app.controller('GameLogicCtrl', function($scope, GameState) {
     return count;
   };
 
+  // Helper function to clear the scope message
   let clearMessage = () => {
     $scope.message = '';
   };
 
+  // Helper function to check if there are any valid choices left
   let isGameOver = () => {
     GameState.buildValidCards();
-    let choices = GameState.getValidChoices();
-    return choices.length === 0;
+    return GameState.getValidChoices() === false;
   }
 });

@@ -16,7 +16,7 @@ describe('GameState Service', function () {
     GameState.dieValues.one = 1;
     GameState.dieValues.two = 1;
     GameState.buildValidCards();
-    expect(GameState.validCards.length).toBe(1);
+    expect(GameState.validCards).toBe(true);
   });
   it('should have a buildPowerSet function', function () {
     expect(angular.isFunction(GameState.buildPowerSet)).toBe(true)
@@ -58,13 +58,13 @@ describe('GameState Service', function () {
     GameState.gameStarted = true;
     GameState.cards = [1,2,3,6,7,8,9];
     GameState.dieValues = {one: 5, two: 4};
-    GameState.validCards = [1,2,3];
+    GameState.validCards = true;
     GameState.reset();
     expect(GameState.gameStarted).toBe(false);
     expect(GameState.cards.length).toBe(9);
     expect(GameState.dieValues.one).toBe(0);
     expect(GameState.dieValues.two).toBe(0);
-    expect(GameState.validCards.length).toBe(0);
+    expect(GameState.validCards).toBe(false);
   });
   it('should have a getValidChoices function', function () {
     expect(angular.isFunction(GameState.getValidChoices)).toBe(true)
@@ -87,7 +87,7 @@ describe('GameLogic Controller', function () {
       GameStateMock.getDieValues.and.returnValue({one: 0, two: 0});
       GameStateMock.getGameState.and.returnValue(false);
       GameStateMock.removeCards.and.returnValue();
-      GameStateMock.getValidChoices.and.returnValue([[2]]);
+      GameStateMock.getValidChoices.and.returnValue(true);
 
       ctrl = $controller('GameLogicCtrl', {
         $scope: $scope,

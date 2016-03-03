@@ -30,8 +30,10 @@ app.controller('GameLogicCtrl', function ($scope, GameState) {
   $scope.gameStarted = GameState.getGameState();
   $scope.cardsToRemove = {};
 
+  // Runs the game - intitiates all of the logic for each step of the game
   $scope.startTurn = function () {
     GameState.gameStarted = true;
+    GameState.validCards = true;
     $scope.gameStarted = GameState.getGameState();
     $scope.cards = GameState.getCardsLeft();
     $scope.cardsToRemove = {};
@@ -47,6 +49,8 @@ app.controller('GameLogicCtrl', function ($scope, GameState) {
     }
   };
 
+  // Adds or removes card from cardsToRemove obj
+  // This also enables dynamic css class changes to change opacity
   $scope.toggleCardRemoval = function (idx) {
     if ($scope.cardsToRemove[idx + 1]) {
       $scope.cardsToRemove[idx + 1] = false;
@@ -57,6 +61,7 @@ app.controller('GameLogicCtrl', function ($scope, GameState) {
     }
   };
 
+  // Validates the set of cards and passes to GameState to remove the cards
   $scope.removeCards = function () {
     var total = $scope.dieValues.one + $scope.dieValues.two;
     if (sum($scope.cardsToRemove) === total) {
@@ -67,6 +72,7 @@ app.controller('GameLogicCtrl', function ($scope, GameState) {
     }
   };
 
+  // Helper function to reset game variables
   $scope.reset = function () {
     clearMessage();
     GameState.reset();
@@ -77,8 +83,11 @@ app.controller('GameLogicCtrl', function ($scope, GameState) {
     $scope.cardsToRemove = {};
   };
 
+  // Generates 2 random numbers between 1 and 6
   var roll = function roll() {
     $scope.dieValues.one = Math.floor(Math.random() * (6 - 1 + 1) + 1);
+
+    // If there is only the '1' card left - only roll one die
     if ($scope.cards[0] !== 1 || $scope.cards.length !== 1) {
       $scope.dieValues.two = Math.floor(Math.random() * (6 - 1 + 1) + 1);
     } else {
@@ -87,6 +96,7 @@ app.controller('GameLogicCtrl', function ($scope, GameState) {
     GameState.dieValues = $scope.dieValues;
   };
 
+  // Validates the choice the user makes when they click on a card
   var validChoice = function validChoice(card) {
     if ($scope.cards.indexOf(card) === -1) {
       $scope.message = 'You already chose that card. Please pick another card.';
@@ -100,6 +110,7 @@ app.controller('GameLogicCtrl', function ($scope, GameState) {
     return true;
   };
 
+  // Used to sum up the object of cardsToRemove
   var sum = function sum(obj) {
     var count = 0;
     for (var key in obj) {
@@ -108,14 +119,15 @@ app.controller('GameLogicCtrl', function ($scope, GameState) {
     return count;
   };
 
+  // Helper function to clear the scope message
   var clearMessage = function clearMessage() {
     $scope.message = '';
   };
 
+  // Helper function to check if there are any valid choices left
   var isGameOver = function isGameOver() {
     GameState.buildValidCards();
-    var choices = GameState.getValidChoices();
-    return choices.length === 0;
+    return GameState.getValidChoices() === false;
   };
 });
 'use strict';
@@ -134,15 +146,18 @@ app.directive('die', function () {
 app.service('GameState', function () {
   var _this = this;
 
+  // Game state variables
   this.gameStarted = false;
   this.cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   this.dieValues = { one: 0, two: 0 };
-  this.validCards = [];
+  this.validCards = false;
 
+  // Builds an array of valid choices the user can make
+  // As soon as it find 1 valid match - it exits to lessen run time
   this.buildValidCards = function () {
     var powerSet = _this.buildPowerSet();
     var value = _this.dieValues.one + _this.dieValues.two;
-    _this.validCards = powerSet.filter(function (set) {
+    _this.validCards = powerSet.some(function (set) {
       if (set[0] > value) return false;
       return value === set.reduce(function (prev, next) {
         return prev + next;
@@ -189,6 +204,6 @@ app.service('GameState', function () {
     _this.gameStarted = false;
     _this.cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     _this.dieValues = { one: 0, two: 0 };
-    _this.validCards = [];
+    _this.validCards = false;
   };
 });

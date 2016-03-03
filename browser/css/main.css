@@ -3,8 +3,12 @@ body {
 }
 
 [ng-click] {
-
+    cursor: pointer;
 }
+
+/*
+    Layout helpers
+*/
 
 .container {
     display: flex;
@@ -17,6 +21,10 @@ body {
     justify-content: center;
     flex-wrap: wrap;
 }
+
+/*
+    Button styling
+*/
 
 .button {
     border: none;

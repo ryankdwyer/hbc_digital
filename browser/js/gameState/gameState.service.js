@@ -1,14 +1,18 @@
 'use strict';
 app.service('GameState', function() {
+
+  // Game state variables
   this.gameStarted = false;
   this.cards = [1,2,3,4,5,6,7,8,9];
   this.dieValues = {one: 0, two: 0};
-  this.validCards = [];
+  this.validCards = false;
 
+  // Builds an array of valid choices the user can make
+  // As soon as it find 1 valid match - it exits to lessen run time
   this.buildValidCards = () => {
     var powerSet = this.buildPowerSet();
     var value = this.dieValues.one + this.dieValues.two;
-    this.validCards = powerSet.filter(function(set) {
+    this.validCards = powerSet.some(function(set) {
       if (set[0] > value) return false;
       return value === set.reduce(function(prev, next) {
           return prev + next;
@@ -55,6 +59,6 @@ app.service('GameState', function() {
     this.gameStarted = false;
     this.cards = [1,2,3,4,5,6,7,8,9];
     this.dieValues = {one: 0, two: 0};
-    this.validCards = [];
+    this.validCards = false;
   };
 });

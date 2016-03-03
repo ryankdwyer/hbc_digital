@@ -1,5 +1,4 @@
 'use strict';
-
 app.directive('die', function() {
   return {
     restrict: 'E',

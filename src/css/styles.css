@@ -1,3 +1,7 @@
+/*
+    Card/Tile styling
+*/
+
 .card {
   height: 5rem;
   width: 5rem;
@@ -21,6 +25,9 @@
 .translucent div {
   opacity: .6;
 }
+/*
+    Dice styling
+*/
 
 .die {
   margin: 1rem;
@@ -29,7 +36,13 @@ body {
   font-family: sans-serif;
 }
 
+[ng-click] {
+  cursor: pointer;
+}
 
+/*
+    Layout helpers
+*/
 
 .container {
   display: flex;
@@ -42,6 +55,10 @@ body {
   justify-content: center;
   flex-wrap: wrap;
 }
+
+/*
+    Button styling
+*/
 
 .button {
   border: none;
