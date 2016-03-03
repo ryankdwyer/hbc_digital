@@ -2,7 +2,7 @@
 app.directive('game', function() {
   return {
     restrict: 'E',
-    templateUrl: 'browser/js/gameLogic/game.html',
+    templateUrl: '../views/game.html',
     controller: 'GameLogicCtrl'
   }
 });

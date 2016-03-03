@@ -6,6 +6,6 @@ app.directive('die', function() {
     scope: {
       die: '=die'
     },
-    templateUrl: 'browser/js/dice/dice.html'
+    templateUrl: '../views/dice.html'
   }
 });

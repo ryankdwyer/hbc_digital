@@ -5,6 +5,6 @@ app.directive('card', function() {
     scope: {
       value: '='
     },
-    templateUrl: 'browser/js/cards/card.html'
+    templateUrl: '../views/card.html'
   }
 });
