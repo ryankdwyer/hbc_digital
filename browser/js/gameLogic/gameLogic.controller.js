@@ -18,7 +18,8 @@ app.controller('GameLogicCtrl', function($scope, GameState) {
     roll();
 
     if (isGameOver()) {
-      $scope.message = `I'm sorry, you're out of turns!`;
+      let total = tallyTotal();
+      $scope.message = `I'm sorry, you're out of turns! You scored: ${total} points!`;
       alert(`Please click 'Reset Game' to play again!`)
     } else {
       $scope.message = `Pick a set of cards that sums to a total of ${$scope.dieValues.one + $scope.dieValues.two}.`;
@@ -105,5 +106,14 @@ app.controller('GameLogicCtrl', function($scope, GameState) {
   let isGameOver = () => {
     GameState.buildValidCards();
     return GameState.getValidChoices() === false;
-  }
+  };
+
+  // Tallys the final score to display to the user.
+  let tallyTotal = () => {
+    return $scope.cards.reduce(function (prev, next) {
+      if (next !== '') return prev + next;
+      return prev;
+    }, 0)
+  };
+
 });

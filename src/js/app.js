@@ -14,6 +14,17 @@ app.directive('card', function () {
 });
 'use strict';
 
+app.directive('die', function () {
+  return {
+    restrict: 'E',
+    scope: {
+      die: '=die'
+    },
+    templateUrl: '../views/dice.html'
+  };
+});
+'use strict';
+
 app.directive('game', function () {
   return {
     restrict: 'E',
@@ -42,7 +53,8 @@ app.controller('GameLogicCtrl', function ($scope, GameState) {
     roll();
 
     if (isGameOver()) {
-      $scope.message = 'I\'m sorry, you\'re out of turns!';
+      var total = tallyTotal();
+      $scope.message = 'I\'m sorry, you\'re out of turns! You scored: ' + total + ' points!';
       alert('Please click \'Reset Game\' to play again!');
     } else {
       $scope.message = 'Pick a set of cards that sums to a total of ' + ($scope.dieValues.one + $scope.dieValues.two) + '.';
@@ -129,16 +141,13 @@ app.controller('GameLogicCtrl', function ($scope, GameState) {
     GameState.buildValidCards();
     return GameState.getValidChoices() === false;
   };
-});
-'use strict';
 
-app.directive('die', function () {
-  return {
-    restrict: 'E',
-    scope: {
-      die: '=die'
-    },
-    templateUrl: '../views/dice.html'
+  // Tallys the final score to display to the user.
+  var tallyTotal = function tallyTotal() {
+    return $scope.cards.reduce(function (prev, next) {
+      if (next !== '') return prev + next;
+      return prev;
+    }, 0);
   };
 });
 'use strict';
@@ -153,7 +162,7 @@ app.service('GameState', function () {
   this.validCards = false;
 
   // Builds an array of valid choices the user can make
-  // As soon as it find 1 valid match - it exits to lessen run time
+  // As soon as it finds 1 valid match - it exits to lessen run time
   this.buildValidCards = function () {
     var powerSet = _this.buildPowerSet();
     var value = _this.dieValues.one + _this.dieValues.two;
@@ -165,6 +174,7 @@ app.service('GameState', function () {
     });
   };
 
+  // Builds all combos of cards that add to dice values
   this.buildPowerSet = function () {
     if (_this.cards.length === 1) return [_this.cards[0]];
     var powerSet = [[]];
@@ -200,6 +210,7 @@ app.service('GameState', function () {
     return _this.gameStarted;
   };
 
+  // Resets game variables
   this.reset = function () {
     _this.gameStarted = false;
     _this.cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
