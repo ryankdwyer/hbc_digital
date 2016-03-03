@@ -14,17 +14,6 @@ app.directive('card', function () {
 });
 'use strict';
 
-app.directive('die', function () {
-  return {
-    restrict: 'E',
-    scope: {
-      die: '=die'
-    },
-    templateUrl: '../views/dice.html'
-  };
-});
-'use strict';
-
 app.directive('game', function () {
   return {
     restrict: 'E',
@@ -148,6 +137,17 @@ app.controller('GameLogicCtrl', function ($scope, GameState) {
       if (next !== '') return prev + next;
       return prev;
     }, 0);
+  };
+});
+'use strict';
+
+app.directive('die', function () {
+  return {
+    restrict: 'E',
+    scope: {
+      die: '=die'
+    },
+    templateUrl: '../views/dice.html'
   };
 });
 'use strict';
