@@ -2,13 +2,13 @@
     {{message}}
 </div>
 <div class="card-list">
-    <card class="card" value=card ng-repeat="card in cards track by $index" ng-click="toggleCardRemoval($event, $index)"></card>
+    <card class="card" ng-class="{'translucent': cardsToRemove[$index + 1]}" value=card ng-repeat="card in cards track by $index" ng-click="toggleCardRemoval($event, $index)"></card>
 </div>
 <div class="game-board">
-    <div ng-click="removeCards()" ng-show="cardsToRemove.length">Remove Cards</div>
     <die die="dieValues.one"></die>
     <die die="dieValues.two"></die>
     <div>Total: {{dieValues.one + dieValues.two}}</div>
-    <button ng-click="roll()" ng-hide="gameStarted">Start Game</button>
+    <button ng-click="removeCards()" ng-show="gameStarted">Remove Cards</button>
+    <button ng-click="startTurn()" ng-hide="gameStarted">Start Game</button>
     <button ng-click="reset()" ng-show="gameStarted">Reset Game</button>
 </div>

@@ -31,8 +31,10 @@ app.service('GameState', function () {
   };
 
   this.removeCards = function (cards) {
-    for (var i = 0; i < cards.length; i++) {
-      _this.cards.splice(cards[i] - 1, 1, '');
+    for (var key in cards) {
+      if (cards.hasOwnProperty(key) && cards[key]) {
+        _this.cards.splice(key - 1, 1, '');
+      }
     }
   };
 
@@ -57,7 +59,6 @@ app.service('GameState', function () {
     _this.cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     _this.dieValues = { one: 0, two: 0 };
     _this.validCards = [];
-    _this.cardsToRemove = [];
   };
 });
 
