@@ -1,0 +1,66 @@
+.card {
+  height: 5rem;
+  width: 5rem;
+  margin: 1rem;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #3498db;
+  color: white;
+}
+
+.card > div {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.card:hover {
+  background-color: #2980b9;
+}
+
+.translucent div {
+  opacity: .6;
+}
+
+.die {
+  margin: 1rem;
+}
+body {
+  font-family: sans-serif;
+}
+
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.button {
+  border: none;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+#remove-cards {
+  background-color: #e67e22;
+}
+
+#start-game {
+  background-color: #2ecc71;
+}
+
+#reset-game {
+  background-color: #f1c40f;
+}

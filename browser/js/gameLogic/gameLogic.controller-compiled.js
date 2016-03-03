@@ -63,9 +63,12 @@ app.controller('GameLogicCtrl', function ($scope, GameState) {
   };
 
   var validChoice = function validChoice(card) {
+    if ($scope.cards.indexOf(card) === -1) {
+      $scope.message = 'You already chose that card. Please pick another card.';
+      return false;
+    }
     var total = $scope.dieValues.one + $scope.dieValues.two;
     if (card + sum($scope.cardsToRemove) > total) {
-      console.log(card, sum($scope.cardsToRemove), total);
       $scope.message = 'That is not a valid choice. Please pick another card.';
       return false;
     }
