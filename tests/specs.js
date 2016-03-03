@@ -83,11 +83,11 @@ describe('GameLogic Controller', function () {
     inject(function($rootScope, $controller) {
       $scope = $rootScope.$new();
 
-      GameStateMock.getCardsLeft.andReturn([1,2,3,4,5,6,7,8,9]);
-      GameStateMock.getDieValues.andReturn({one: 0, two: 0});
-      GameStateMock.getGameState.andReturn(false);
-      GameStateMock.removeCards.andReturn();
-      GameStateMock.getValidChoices.andReturn([[2]]);
+      GameStateMock.getCardsLeft.and.returnValue([1,2,3,4,5,6,7,8,9]);
+      GameStateMock.getDieValues.and.returnValue({one: 0, two: 0});
+      GameStateMock.getGameState.and.returnValue(false);
+      GameStateMock.removeCards.and.returnValue();
+      GameStateMock.getValidChoices.and.returnValue([[2]]);
 
       ctrl = $controller('GameLogicCtrl', {
         $scope: $scope,
@@ -120,7 +120,7 @@ describe('GameLogic Controller', function () {
   });
   it('should update $scope.message when calling the startTurn function', function () {
     $scope.startTurn();
-    expect($scope.message).toNotEqual(`Welcome to Shut the Box. Click 'Start Game' to begin.`)
+    expect($scope.message).not.toEqual(`Welcome to Shut the Box. Click 'Start Game' to begin.`)
   });
   it('should have a reset function', function () {
     expect(angular.isFunction($scope.reset)).toBe(true);
