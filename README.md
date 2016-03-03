@@ -8,3 +8,6 @@
 5. ```npm test``` to ensure everything was installed correctly
 6. ```npm start```
 7. Point your browser to http://localhost:1337 to play!
+
+###OR
+Check it out live at: https://shut-the-box-hbc.herokuapp.com/
